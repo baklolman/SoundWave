@@ -8,13 +8,13 @@ SoundWave is a modern full-stack music discovery web application powered by the 
 
 ## 🚀 Live Demo
 
-🔗 https://YOUR_USERNAME.github.io/soundwave-music-app/
+🔗 [https://YOUR_USERNAME.github.io/soundwave-music-app/](https://soundwavi.netlify.app/)
 
 ---
 
 ## 📸 Screenshot
 
-![SoundWave Preview](./screenshot.png)
+![SoundWave Preview](./screenshot1.png)
 
 ---
 
