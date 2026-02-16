@@ -1,30 +1,65 @@
-# 🎵 SoundWave - Music Discovery Web App
+# 🎵 SoundWave – Full Stack Music Discovery Web App
 
-SoundWave is a modern and responsive music discovery web application powered by the iTunes API. It allows users to search for songs, explore trending music, preview tracks, and discover artists in a beautiful UI experience.
+![SoundWave Banner](./screenshot.png)
 
-## 🚀 Features
+SoundWave is a modern full-stack music discovery web application powered by the iTunes Search API and Firebase services. Users can search songs, explore trending music, preview tracks, and securely manage accounts with authentication and database integration.
 
-- 🔍 Search for songs, albums, and artists
-- 📈 View trending music
-- 🎧 Preview track audio
-- 🎨 Modern gradient UI design
-- 📱 Fully responsive layout
-- 🌙 Smooth and clean user experience
+---
 
-## 🛠️ Built With
+## 🚀 Live Demo
 
+🔗 https://YOUR_USERNAME.github.io/soundwave-music-app/
+
+---
+
+## 📸 Screenshot
+
+![SoundWave Preview](./screenshot.png)
+
+---
+
+## ✨ Features
+
+### 🎧 Music Discovery
+- Search songs, albums, and artists
+- Real-time results using iTunes API
+- 30-second audio previews
+- Trending music section
+- Genre & artist exploration
+
+### 🔐 Authentication
+- User registration & login
+- Firebase Authentication (Email/Password)
+- Secure session handling with cookies
+- Persistent login state
+
+### ☁️ Database
+- Firebase Realtime Database integration
+- Store user information securely
+- Manage user-specific data
+
+### 🎨 UI/UX
+- Modern gradient hero section
+- Clean and responsive design
+- Smooth animations and transitions
+- Mobile-friendly layout
+
+---
+
+## 🏗️ Tech Stack
+
+### Frontend
 - HTML5
 - CSS3
-- JavaScript (Vanilla JS)
+- Vanilla JavaScript (ES6+)
+
+### Backend & Services
 - iTunes Search API
+- Firebase Authentication
+- Firebase Realtime Database
+- Browser Cookies (Session Management)
 
-## 📸 Preview
+---
 
-![SoundWave Screenshot](./screenshot.png)
-
-## 🔗 Live Demo
-
-https://soundwavi.netlify.app/
-
-## 📦 Installation
+## 📂 Project Structure
 
