@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundWave — Discover Music</title>
+    <meta name="description"
+        content="Discover, search, and preview millions of songs with SoundWave. Powered by iTunes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">♫</span>
+                <span class="logo-text">SoundWave</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#search-section">Search</a></li>
+                <li><a href="#trending">Trending</a></li>
+                <li><a href="#genres">Genres</a></li>
+                <li><a href="#artist-spotlight">Artists</a></li>
+                <li><a href="#history" class="history-nav-link">History <span class="history-badge"
+                            id="historyBadge"></span></a></li>
+            </ul>
+            <div class="nav-auth" id="navAuth">
+                <a href="login.html" class="btn btn-ghost btn-sm nav-login-btn" id="navLoginBtn">Sign In</a>
+                <div class="nav-user-profile" id="navUserProfile" style="display:none;">
+                    <div class="nav-avatar-wrap">
+                        <a href="profile.html" class="nav-avatar" id="navAvatar"
+                            style="text-decoration:none;color:white;">?</a>
+                        <span class="nav-premium-badge" id="navPremiumBadge" style="display:none;"></span>
+                    </div>
+                    <div class="nav-user-dropdown" id="navUserDropdown">
+                        <div class="dropdown-header">
+                            <span class="dropdown-name" id="dropdownName"></span>
+                            <span class="dropdown-email" id="dropdownEmail"></span>
+                        </div>
+                        <a href="profile.html" class="dropdown-item" style="text-decoration:none;color:inherit;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z" />
+                            </svg>
+                            My Profile
+                        </a>
+                        <a href="profile.html" class="dropdown-item" style="text-decoration:none;color:inherit;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <path d="M12 8v4l2 2" />
+                            </svg>
+                            🪙 <span id="navWalletBalance">0.00</span> SC
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" id="signOutBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                            </svg>
+                            Sign Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Parallax -->
+    <section class="hero" id="hero">
+        <div class="hero-parallax-bg"></div>
+        <div class="hero-particles" id="heroParticles"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge animate-on-scroll">
+                <span class="badge-dot"></span>
+                Powered by iTunes
+            </div>
+            <h1 class="hero-title animate-on-scroll">
+                <span class="title-line">Feel the</span>
+                <span class="title-line gradient-text">Rhythm</span>
+                <span class="title-line">of Music</span>
+            </h1>
+            <p class="hero-subtitle animate-on-scroll">
+                Discover millions of songs, albums, and artists. Search, preview, and explore music like never before.
+            </p>
+            <div class="hero-cta animate-on-scroll">
+                <a href="subscription.html" class="btn btn-primary">
+                    <span>Go Premium</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="#trending" class="btn btn-ghost">
+                    <span>View Trending</span>
+                </a>
+            </div>
+            <div class="hero-stats animate-on-scroll">
+                <div class="stat">
+                    <span class="stat-number" data-count="75">0</span><span class="stat-suffix">M+</span>
+                    <span class="stat-label">Songs</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="30">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Genres</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="100">0</span><span class="stat-suffix">K+</span>
+                    <span class="stat-label">Artists</span>
+                </div>
+            </div>
+        </div>
+        <!-- Floating Music Notes -->
+        <div class="floating-notes">
+            <span class="note note-1">♪</span>
+            <span class="note note-2">♫</span>
+            <span class="note note-3">♬</span>
+            <span class="note note-4">♩</span>
+            <span class="note note-5">♪</span>
+            <span class="note note-6">♫</span>
+            <span class="note note-7">♬</span>
+            <span class="note note-8">♩</span>
+        </div>
+        <!-- Equalizer Animation -->
+        <div class="hero-equalizer">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="mouse-wheel"></div>
+            </div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="section search-section" id="search-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Discover</span>
+                <h2 class="section-title">Search <span class="gradient-text">Music</span></h2>
+                <p class="section-desc">Find your favorite songs, artists, and albums from the iTunes library</p>
+            </div>
+            <div class="search-wrapper animate-on-scroll">
+                <div class="search-bar">
+                    <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search for songs, artists, albums..."
+                        autocomplete="off">
+                    <button class="search-btn" id="searchBtn">
+                        <span>Search</span>
+                    </button>
+                </div>
+                <div class="search-suggestions">
+                    <span class="suggestion-label">Try:</span>
+                    <button class="suggestion-chip" data-query="Taylor Swift">Taylor Swift</button>
+                    <button class="suggestion-chip" data-query="The Weeknd">The Weeknd</button>
+                    <button class="suggestion-chip" data-query="Drake">Drake</button>
+                    <button class="suggestion-chip" data-query="Billie Eilish">Billie Eilish</button>
+                    <button class="suggestion-chip" data-query="Dua Lipa">Dua Lipa</button>
+                </div>
+            </div>
+            <div class="results-info" id="resultsInfo"></div>
+            <div class="results-grid" id="resultsGrid"></div>
+            <div class="loading-spinner" id="loadingSpinner">
+                <div class="spinner"></div>
+                <span>Searching iTunes...</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Section -->
+    <section class="section trending-section" id="trending">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Hot Right Now</span>
+                <h2 class="section-title">Trending <span class="gradient-text">Tracks</span></h2>
+                <p class="section-desc">What everyone's listening to right now</p>
+            </div>
+            <div class="trending-carousel-wrapper">
+                <button class="carousel-btn carousel-prev" id="trendingPrev" aria-label="Previous">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                </button>
+                <div class="trending-carousel" id="trendingCarousel"></div>
+                <button class="carousel-btn carousel-next" id="trendingNext" aria-label="Next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Divider -->
+    <section class="parallax-divider" id="parallaxDivider1">
+        <div class="parallax-content">
+            <h2 class="parallax-text animate-on-scroll">Music is the <span class="gradient-text">universal
+                    language</span> of mankind</h2>
+            <p class="parallax-author animate-on-scroll">— Henry Wadsworth Longfellow</p>
+        </div>
+    </section>
+
+    <!-- Genre Explorer -->
+    <section class="section genre-section" id="genres">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Explore</span>
+                <h2 class="section-title">Browse by <span class="gradient-text">Genre</span></h2>
+                <p class="section-desc">Dive into any genre that catches your ear</p>
+            </div>
+            <div class="genre-grid animate-on-scroll" id="genreGrid">
+                <div class="genre-tile" data-genre="pop" style="--genre-color: #ec4899;">
+                    <div class="genre-icon">🎤</div>
+                    <h3>Pop</h3>
+                    <span class="genre-arrow">→</span>
+                </div>
+                <div class="genre-tile" data-genre="rock" style="--genre-color: #ef4444;">
+                    <div class="genre-icon">🎸</div>
+                    <h3>Rock</h3>
+                    <span class="genre-arrow">→</span>
+                </div>
+                <div class="genre-tile" data-genre="hip hop" style="--genre-color: #f59e0b;">
+                    <div class="genre-icon">🎧</div>
+                    <h3>Hip Hop</h3>
+                    <span class="genre-arrow">→</span>
+                </div>
+                <div class="genre-tile" data-genre="electronic" style="--genre-color: #06b6d4;">
+                    <div class="genre-icon">🎹</div>
+                    <h3>Electronic</h3>
+                    <span class="genre-arrow">→</span>
+                </div>
+                <div class="genre-tile" data-genre="r&b" style="--genre-color: #8b5cf6;">
+                    <div class="genre-icon">🎵</div>
+                    <h3>R&B</h3>
+                    <span class="genre-arrow">→</span>
+                </div>
+                <div class="genre-tile" data-genre="jazz" style="--genre-color: #14b8a6;">
+                    <div class="genre-icon">🎷</div>
+                    <h3>Jazz</h3>
+                    <span class="genre-arrow">→</span>
+                </div>
+                <div class="genre-tile" data-genre="classical" style="--genre-color: #6366f1;">
+                    <div class="genre-icon">🎻</div>
+                    <h3>Classical</h3>
+                    <span class="genre-arrow">→</span>
+                </div>
+                <div class="genre-tile" data-genre="country" style="--genre-color: #d97706;">
+                    <div class="genre-icon">🤠</div>
+                    <h3>Country</h3>
+                    <span class="genre-arrow">→</span>
+                </div>
+            </div>
+            <div class="genre-results" id="genreResults">
+                <div class="genre-results-header">
+                    <h3 id="genreResultsTitle"></h3>
+                    <button class="btn btn-ghost btn-sm" id="closeGenreResults">✕ Close</button>
+                </div>
+                <div class="results-grid" id="genreResultsGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artist Spotlight with Parallax -->
+    <section class="section artist-section" id="artist-spotlight">
+        <div class="artist-parallax-layer"></div>
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Featured</span>
+                <h2 class="section-title">Artist <span class="gradient-text">Spotlight</span></h2>
+                <p class="section-desc">Explore top albums from a featured artist</p>
+            </div>
+            <div class="artist-spotlight-content" id="artistSpotlight">
+                <div class="artist-loading">
+                    <div class="spinner"></div>
+                    <span>Loading artist spotlight...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Second Parallax Divider -->
+    <section class="parallax-divider parallax-divider-2" id="parallaxDivider2">
+        <div class="parallax-content">
+            <h2 class="parallax-text animate-on-scroll">Where words fail, <span class="gradient-text">music
+                    speaks</span></h2>
+            <p class="parallax-author animate-on-scroll">— Hans Christian Andersen</p>
+        </div>
+    </section>
+
+    <!-- Listening History Section -->
+    <section class="section history-section" id="history">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Your Journey</span>
+                <h2 class="section-title">Listening <span class="gradient-text">History</span></h2>
+                <p class="section-desc">Every song you've previewed, saved right here in your browser</p>
+            </div>
+            <div class="history-controls animate-on-scroll">
+                <div class="history-stats-bar">
+                    <span class="history-count" id="historyCount">0 songs played</span>
+                </div>
+                <button class="btn btn-ghost btn-sm history-clear-btn" id="clearHistoryBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14" />
+                    </svg>
+                    <span>Clear History</span>
+                </button>
+            </div>
+            <div class="history-empty" id="historyEmpty">
+                <div class="history-empty-icon">🎧</div>
+                <h3>No songs played yet</h3>
+                <p>Start exploring and play some tracks — they'll appear here automatically!</p>
+                <a href="#search-section" class="btn btn-primary btn-sm">Start Listening</a>
+            </div>
+            <div class="history-grid" id="historyGrid"></div>
+        </div>
+    </section>
+
+    <!-- Now Playing Bar (appears when audio is playing) -->
+    <div class="now-playing-bar" id="nowPlayingBar">
+        <div class="now-playing-info">
+            <img class="now-playing-art" id="nowPlayingArt" src="" alt="">
+            <div class="now-playing-text">
+                <span class="now-playing-title" id="nowPlayingTitle"></span>
+                <span class="now-playing-artist" id="nowPlayingArtist"></span>
+            </div>
+        </div>
+        <div class="now-playing-controls">
+            <button class="np-btn" id="npPlayPause" aria-label="Play/Pause">
+                <svg class="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                <svg class="pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                    style="display:none">
+                    <rect x="6" y="4" width="4" height="16" />
+                    <rect x="14" y="4" width="4" height="16" />
+                </svg>
+            </button>
+            <div class="np-progress-wrapper">
+                <div class="np-progress" id="npProgress">
+                    <div class="np-progress-fill" id="npProgressFill"></div>
+                </div>
+            </div>
+            <span class="np-time" id="npTime">0:00</span>
+        </div>
+        <button class="np-close" id="npClose" aria-label="Close player">✕</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-glow"></div>
+        <div class="container">
+            <div class="footer-grid animate-on-scroll">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <span class="logo-icon">♫</span>
+                        <span class="logo-text">SoundWave</span>
+                    </a>
+                    <p>Discover, search, and preview millions of songs. Your gateway to the world of music, powered by
+                        the iTunes API.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigate</h4>
+                    <a href="#hero">Home</a>
+                    <a href="#search-section">Search</a>
+                    <a href="#trending">Trending</a>
+                    <a href="#genres">Genres</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Genres</h4>
+                    <a href="#genres" class="genre-link" data-genre="pop">Pop</a>
+                    <a href="#genres" class="genre-link" data-genre="rock">Rock</a>
+                    <a href="#genres" class="genre-link" data-genre="hip hop">Hip Hop</a>
+                    <a href="#genres" class="genre-link" data-genre="electronic">Electronic</a>
+                </div>
+                <div class="footer-links">
+                    <h4>About</h4>
+                    <a href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/"
+                        target="_blank" rel="noopener">iTunes API</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+            <div class="footer-bottom animate-on-scroll">
+                <p>&copy; 2026 SoundWave. Built with ♫ and the iTunes Search API.</p>
+                <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 15l-6-6-6 6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <!-- Firebase Init (before script.js so it can access db) -->
+    <script>
+        (() => {
+            'use strict';
+            try {
+                console.log('[Firebase] Initializing...');
+                const app = firebase.initializeApp(firebaseConfig);
+                console.log('[Firebase] App initialized ✓');
+
+                const auth = firebase.auth();
+                console.log('[Firebase] Auth ready ✓');
+
+                const rtdb = firebase.database();
+                console.log('[Firebase] Realtime Database ready ✓');
+
+                let analytics = null;
+                try { analytics = firebase.analytics(); console.log('[Firebase] Analytics ready ✓'); } catch (e) { console.warn('[Firebase] Analytics not available:', e.message); }
+
+                // Expose for script.js
+                window.swFirebase = { auth, rtdb, analytics, currentUser: null };
+
+                // Test database connection
+                rtdb.ref('.info/connected').on('value', (snap) => {
+                    console.log('[Firebase] Database connected:', snap.val());
+                });
+
+                // Log page view
+                if (analytics) analytics.logEvent('page_view', { page_title: 'Home' });
+
+                // Auth state listener
+                auth.onAuthStateChanged((user) => {
+                    window.swFirebase.currentUser = user;
+                    console.log('[Firebase] Auth state:', user ? `Signed in as ${user.email}` : 'Not signed in (guest)');
+
+                    const navLoginBtn = document.getElementById('navLoginBtn');
+                    const navUserProfile = document.getElementById('navUserProfile');
+                    const navAvatar = document.getElementById('navAvatar');
+                    const dropdownName = document.getElementById('dropdownName');
+                    const dropdownEmail = document.getElementById('dropdownEmail');
+
+                    if (user) {
+                        if (navLoginBtn) navLoginBtn.style.display = 'none';
+                        if (navUserProfile) navUserProfile.style.display = 'flex';
+                        const initials = (user.displayName || user.email || '?')
+                            .split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+                        if (navAvatar) navAvatar.textContent = initials;
+                        if (dropdownName) dropdownName.textContent = user.displayName || 'User';
+                        if (dropdownEmail) dropdownEmail.textContent = user.email || '';
+                        if (analytics) analytics.setUserId(user.uid);
+                        // Wallet balance in dropdown
+                        rtdb.ref(`users/${user.uid}/wallet/balance`).on('value', (snap) => {
+                            const bal = parseFloat(snap.val()) || 0;
+                            const el = document.getElementById('navWalletBalance');
+                            if (el) el.textContent = bal.toFixed(2);
+                        });
+                        // Premium badge on avatar
+                        rtdb.ref(`users/${user.uid}/subscription`).on('value', (snap) => {
+                            const sub = snap.val();
+                            const badge = document.getElementById('navPremiumBadge');
+                            if (!badge) return;
+                            if (sub && sub.plan && sub.plan !== 'free') {
+                                badge.style.display = 'flex';
+                                badge.className = 'nav-premium-badge ' + sub.plan;
+                                badge.textContent = sub.plan === 'ultimate' ? '👑' : '🚀';
+                                badge.title = sub.plan.charAt(0).toUpperCase() + sub.plan.slice(1) + ' Member';
+                            } else {
+                                badge.style.display = 'none';
+                            }
+                        });
+                    } else {
+                        if (navLoginBtn) navLoginBtn.style.display = '';
+                        if (navUserProfile) navUserProfile.style.display = 'none';
+                    }
+                });
+
+                // Sign out
+                const signOutBtn = document.getElementById('signOutBtn');
+                signOutBtn?.addEventListener('click', async () => {
+                    try {
+                        await auth.signOut();
+                        if (analytics) analytics.logEvent('logout');
+                    } catch (e) { console.error(e); }
+                });
+
+                console.log('[Firebase] Setup complete ✓');
+            } catch (e) {
+                console.error('[Firebase] INIT FAILED:', e.message, e);
+                window.swFirebase = { auth: null, rtdb: null, analytics: null, currentUser: null };
+            }
+        })();
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

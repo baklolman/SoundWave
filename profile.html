@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundWave — My Profile</title>
+    <meta name="description" content="Manage your SoundWave profile, wallet balance, and subscription.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #111127;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-glass: rgba(255, 255, 255, 0.06);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --purple: #8b5cf6;
+            --purple-glow: rgba(139, 92, 246, 0.4);
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+            --green: #22c55e;
+            --amber: #f59e0b;
+            --gradient-main: linear-gradient(135deg, #8b5cf6, #06b6d4, #ec4899);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: var(--font);
+            color: inherit;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg-effects {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: orbFloat 14s ease-in-out infinite alternate;
+        }
+
+        .bg-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(139, 92, 246, 0.1);
+            top: -15%;
+            left: -10%;
+        }
+
+        .bg-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(6, 182, 212, 0.08);
+            bottom: -10%;
+            right: -8%;
+            animation-delay: 4s;
+        }
+
+        @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(50px, -40px) scale(1.2);
+            }
+        }
+
+        /* Nav */
+        .profile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .profile-nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .profile-nav-logo .icon {
+            font-size: 1.4rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-nav-logo .text {
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .profile-nav-back {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .profile-nav-back:hover {
+            color: var(--text-primary);
+        }
+
+        .profile-nav-back svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Main Container */
+        .profile-main {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+        }
+
+        /* Auth Gate */
+        .auth-gate {
+            text-align: center;
+            padding: 100px 24px;
+        }
+
+        .auth-gate-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .auth-gate h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .auth-gate p {
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            font-size: 1rem;
+        }
+
+        .auth-gate-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: var(--gradient-main);
+            background-size: 200% auto;
+            color: white;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: var(--radius-xl);
+            transition: var(--transition);
+            box-shadow: 0 4px 20px var(--purple-glow);
+        }
+
+        .auth-gate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--purple-glow);
+        }
+
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 32px;
+            margin-bottom: 24px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(12px);
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 0 30px var(--purple-glow);
+        }
+
+        .profile-info h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .profile-info .email {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .profile-info .member-since {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Grid */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        /* Card */
+        .profile-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .profile-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .profile-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .profile-card:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .card-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* Wallet Card */
+        .wallet-balance-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .wallet-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(139, 92, 246, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        .wallet-amount {
+            font-size: 2.4rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        .wallet-amount .currency {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .wallet-label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .wallet-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .wallet-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .wallet-btn-primary {
+            background: var(--gradient-main);
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 4px 15px var(--purple-glow);
+        }
+
+        .wallet-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--purple-glow);
+        }
+
+        .wallet-btn-outline {
+            border: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+        }
+
+        .wallet-btn-outline:hover {
+            border-color: var(--purple);
+            color: var(--text-primary);
+        }
+
+        /* Subscription Card */
+        .sub-status {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .sub-plan-badge {
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-plan-free {
+            background: rgba(100, 116, 139, 0.15);
+            color: var(--text-secondary);
+        }
+
+        .sub-plan-pro {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--purple);
+        }
+
+        .sub-plan-ultimate {
+            background: rgba(236, 72, 153, 0.15);
+            color: var(--pink);
+        }
+
+        .sub-plan-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .sub-detail {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .sub-upgrade-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 10px 24px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--purple);
+            transition: var(--transition);
+        }
+
+        .sub-upgrade-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Transaction History */
+        .transactions-card {
+            animation-delay: 0.3s;
+        }
+
+        .tx-list {
+            list-style: none;
+        }
+
+        .tx-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .tx-item:last-child {
+            border-bottom: none;
+        }
+
+        .tx-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tx-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .tx-icon-credit {
+            background: rgba(34, 197, 94, 0.12);
+        }
+
+        .tx-icon-debit {
+            background: rgba(236, 72, 153, 0.12);
+        }
+
+        .tx-desc {
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        .tx-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .tx-amount {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .tx-amount-credit {
+            color: var(--green);
+        }
+
+        .tx-amount-debit {
+            color: var(--pink);
+        }
+
+        .tx-empty {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Song History */
+        .song-history-card {
+            animation-delay: 0.4s;
+        }
+
+        .song-list {
+            list-style: none;
+        }
+
+        .song-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .song-item:last-child {
+            border-bottom: none;
+        }
+
+        .song-art {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--bg-card);
+        }
+
+        .song-meta .song-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .song-meta .song-artist {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .song-meta .song-time {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .song-empty {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Actions */
+        .profile-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+            animation: fadeUp 0.5s ease 0.5s both;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .action-signout {
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.06);
+        }
+
+        .action-signout:hover {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-nav {
+                padding: 12px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-effects">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="profile-nav">
+        <a href="index.html" class="profile-nav-logo">
+            <span class="icon">♫</span>
+            <span class="text">SoundWave</span>
+        </a>
+        <a href="index.html" class="profile-nav-back">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Music
+        </a>
+    </nav>
+
+    <!-- Auth Gate (shown when not logged in) -->
+    <div class="profile-main" id="authGate" style="display:none;">
+        <div class="auth-gate">
+            <div class="auth-gate-icon">🔒</div>
+            <h2>Sign in to view your profile</h2>
+            <p>Access your wallet, subscription, and listening history.</p>
+            <a href="login.html" class="auth-gate-btn">
+                Sign In
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Profile Content (shown when logged in) -->
+    <div class="profile-main" id="profileContent" style="display:none;">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-avatar" id="profileAvatar">?</div>
+            <div class="profile-info">
+                <h1 id="profileName">Loading...</h1>
+                <div class="email" id="profileEmail"></div>
+                <div class="member-since" id="profileMemberSince"></div>
+            </div>
+        </div>
+
+        <!-- Wallet & Subscription Grid -->
+        <div class="profile-grid">
+            <!-- Wallet Card -->
+            <div class="profile-card">
+                <div class="card-title">💰 SoundCoin Wallet</div>
+                <div class="wallet-balance-row">
+                    <div class="wallet-icon">🪙</div>
+                    <div>
+                        <div class="wallet-amount">
+                            <span class="currency">SC </span><span id="walletBalance">0.00</span>
+                        </div>
+                        <div class="wallet-label">Available Balance</div>
+                    </div>
+                </div>
+                <div class="wallet-actions">
+                    <a href="subscription.html" class="wallet-btn wallet-btn-primary">Buy Premium</a>
+                    <button class="wallet-btn wallet-btn-outline" id="viewTxBtn">Transactions</button>
+                </div>
+            </div>
+
+            <!-- Subscription Card -->
+            <div class="profile-card">
+                <div class="card-title">🎵 Subscription</div>
+                <div class="sub-status">
+                    <span class="sub-plan-badge sub-plan-free" id="subBadge">Free</span>
+                    <span class="sub-plan-name" id="subPlanName">Free Plan</span>
+                </div>
+                <div class="sub-detail" id="subBilling"></div>
+                <div class="sub-detail" id="subExpiry"></div>
+                <a href="subscription.html" class="sub-upgrade-btn" id="subUpgradeBtn">
+                    Upgrade Plan
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Transactions -->
+        <div class="profile-card transactions-card">
+            <div class="card-title">📊 Recent Transactions</div>
+            <ul class="tx-list" id="txList">
+                <li class="tx-empty">No transactions yet</li>
+            </ul>
+        </div>
+
+        <!-- Recent Songs -->
+        <div class="profile-card song-history-card" style="margin-top: 24px;">
+            <div class="card-title">🎧 Recent Listens</div>
+            <ul class="song-list" id="songList">
+                <li class="song-empty">No songs played yet</li>
+            </ul>
+        </div>
+
+        <!-- Actions -->
+        <div class="profile-actions">
+            <button class="action-btn action-signout" id="profileSignOut">Sign Out</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script>
+        (() => {
+            'use strict';
+
+            try {
+                const app = firebase.initializeApp(firebaseConfig);
+                const auth = firebase.auth();
+                const rtdb = firebase.database();
+                let analytics = null;
+                try { analytics = firebase.analytics(); } catch (e) { }
+
+                if (analytics) analytics.logEvent('page_view', { page_title: 'Profile' });
+
+                const authGate = document.getElementById('authGate');
+                const profileContent = document.getElementById('profileContent');
+
+                auth.onAuthStateChanged(async (user) => {
+                    if (!user) {
+                        authGate.style.display = '';
+                        profileContent.style.display = 'none';
+                        return;
+                    }
+
+                    authGate.style.display = 'none';
+                    profileContent.style.display = '';
+
+                    // Profile header
+                    const name = user.displayName || user.email?.split('@')[0] || 'User';
+                    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+                    document.getElementById('profileAvatar').textContent = initials;
+                    document.getElementById('profileName').textContent = name;
+                    document.getElementById('profileEmail').textContent = user.email || '';
+                    const created = user.metadata?.creationTime;
+                    if (created) {
+                        document.getElementById('profileMemberSince').textContent =
+                            'Member since ' + new Date(created).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+                    }
+
+                    // Load wallet
+                    loadWallet(rtdb, user.uid);
+                    // Load subscription
+                    loadSubscription(rtdb, user.uid);
+                    // Load transactions
+                    loadTransactions(rtdb, user.uid);
+                    // Load song history
+                    loadSongHistory(rtdb, user.uid);
+                });
+
+                // Sign out
+                document.getElementById('profileSignOut').addEventListener('click', async () => {
+                    await auth.signOut();
+                    window.location.href = 'login.html';
+                });
+
+                // View transactions toggle
+                document.getElementById('viewTxBtn').addEventListener('click', () => {
+                    document.querySelector('.transactions-card').scrollIntoView({ behavior: 'smooth' });
+                });
+
+            } catch (e) {
+                console.error('Firebase init failed:', e);
+            }
+
+            function loadWallet(rtdb, uid) {
+                rtdb.ref(`users/${uid}/wallet/balance`).on('value', (snap) => {
+                    const balance = snap.val() || 0;
+                    document.getElementById('walletBalance').textContent =
+                        parseFloat(balance).toFixed(2);
+                });
+            }
+
+            function loadSubscription(rtdb, uid) {
+                rtdb.ref(`users/${uid}/subscription`).on('value', (snap) => {
+                    const sub = snap.val() || { plan: 'free' };
+                    const badge = document.getElementById('subBadge');
+                    const planName = document.getElementById('subPlanName');
+                    const billing = document.getElementById('subBilling');
+                    const expiry = document.getElementById('subExpiry');
+                    const upgradeBtn = document.getElementById('subUpgradeBtn');
+
+                    const planMap = {
+                        free: { label: 'Free', class: 'sub-plan-free', name: 'Free Plan' },
+                        pro: { label: 'Pro', class: 'sub-plan-pro', name: 'Pro Plan' },
+                        ultimate: { label: 'Ultimate', class: 'sub-plan-ultimate', name: 'Ultimate Plan' }
+                    };
+                    const p = planMap[sub.plan] || planMap.free;
+
+                    badge.textContent = p.label;
+                    badge.className = 'sub-plan-badge ' + p.class;
+                    planName.textContent = p.name;
+
+                    if (sub.plan !== 'free') {
+                        billing.textContent = `Billing: ${sub.billing || 'monthly'}`;
+                        if (sub.startDate) {
+                            expiry.textContent = `Started: ${sub.startDate}`;
+                        }
+                        upgradeBtn.textContent = sub.plan === 'ultimate' ? '✓ Max Plan' : 'Upgrade Plan';
+                    } else {
+                        billing.textContent = '';
+                        expiry.textContent = '';
+                        upgradeBtn.innerHTML = 'Upgrade Plan <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+                    }
+                });
+            }
+
+            function loadTransactions(rtdb, uid) {
+                rtdb.ref(`users/${uid}/wallet/transactions`).orderByChild('epochMs').limitToLast(10).on('value', (snap) => {
+                    const txList = document.getElementById('txList');
+                    const data = snap.val();
+
+                    if (!data) {
+                        txList.innerHTML = '<li class="tx-empty">No transactions yet</li>';
+                        return;
+                    }
+
+                    const txs = Object.values(data).sort((a, b) => (b.epochMs || 0) - (a.epochMs || 0));
+                    txList.innerHTML = txs.map(tx => {
+                        const isCredit = tx.type === 'credit' || tx.type === 'topup';
+                        return `
+                            <li class="tx-item">
+                                <div class="tx-left">
+                                    <div class="tx-icon ${isCredit ? 'tx-icon-credit' : 'tx-icon-debit'}">
+                                        ${isCredit ? '↗' : '↙'}
+                                    </div>
+                                    <div>
+                                        <div class="tx-desc">${tx.description || tx.type}</div>
+                                        <div class="tx-date">${tx.date || ''} ${tx.time || ''}</div>
+                                    </div>
+                                </div>
+                                <div class="tx-amount ${isCredit ? 'tx-amount-credit' : 'tx-amount-debit'}">
+                                    ${isCredit ? '+' : '-'}${parseFloat(tx.amount).toFixed(2)} SC
+                                </div>
+                            </li>`;
+                    }).join('');
+                });
+            }
+
+            function loadSongHistory(rtdb, uid) {
+                rtdb.ref(`songLog/users/${uid}`).orderByChild('epochMs').limitToLast(8).on('value', (snap) => {
+                    const songList = document.getElementById('songList');
+                    const data = snap.val();
+
+                    if (!data) {
+                        songList.innerHTML = '<li class="song-empty">No songs played yet</li>';
+                        return;
+                    }
+
+                    const songs = Object.values(data).sort((a, b) => (b.epochMs || 0) - (a.epochMs || 0));
+                    songList.innerHTML = songs.map(s => `
+                        <li class="song-item">
+                            <img class="song-art" src="${s.artwork || ''}" alt="${s.title}" onerror="this.style.display='none'">
+                            <div class="song-meta">
+                                <div class="song-title">${s.title || 'Unknown'}</div>
+                                <div class="song-artist">${s.artist || 'Unknown'}</div>
+                                <div class="song-time">${s.date || ''} ${s.time || ''}</div>
+                            </div>
+                        </li>
+                    `).join('');
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>
